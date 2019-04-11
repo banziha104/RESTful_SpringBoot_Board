@@ -20,8 +20,13 @@ public class UserController {
 
     @PostMapping(value = "/join")
     public User create(@RequestBody User user){
-        System.out.println(user);
-        return userService.join(user.getName(),user.getPassword());
+        try{
+            System.out.println(user);
+            return userService.join(user.getName(),user.getPassword());
+        }catch (AlreadyExistsException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
